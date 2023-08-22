@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@floating-ui/dom": "^1.5.1",
 		"@lucia-auth/adapter-prisma": "^3.0.1",
 		"@lucia-auth/oauth": "^2.1.2",
 		"@lucia-auth/sveltekit": "^0.6.11",

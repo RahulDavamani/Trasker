@@ -19,7 +19,7 @@ export const googleAuth = google(auth, {
 	clientId: GOOGLE_CLIENT_ID,
 	clientSecret: GOOGLE_CLIENT_SECRET,
 	redirectUri: `${env.BASE_URL}/login/google/callback`,
-	scope: ['email']
+	scope: ['email', 'profile']
 });
 
 export type Auth = typeof auth;

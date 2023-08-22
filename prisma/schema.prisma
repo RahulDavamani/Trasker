@@ -14,6 +14,7 @@ model User {
 
    auth_session Session[]
    key          Key[]
+   projects     Project[]
 }
 
 model Session {
@@ -36,4 +37,37 @@ model Key {
    user User @relation(references: [id], fields: [user_id], onDelete: Cascade)
 
    @@index([user_id])
+}
+
+model Project {
+   id     String @id @unique @default(nanoid())
+   name   String
+   status String
+   userId String
+
+   user  User   @relation(references: [id], fields: [userId], onDelete: Cascade)
+   tasks Task[]
+
+   @@unique([userId, name])
+}
+
+model Task {
+   id        String @id @unique @default(nanoid())
+   name      String
+   status    String
+   projectId String
+
+   project       Project        @relation(references: [id], fields: [projectId], onDelete: Cascade)
+   taskDurations TaskDuration[]
+
+   @@unique([projectId, name])
+}
+
+model TaskDuration {
+   id     String @id @unique @default(nanoid())
+   start  String
+   end    String
+   taskId String
+
+   task Task @relation(fields: [taskId], references: [id])
 }
