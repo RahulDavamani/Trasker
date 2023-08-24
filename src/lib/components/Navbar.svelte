@@ -4,6 +4,7 @@
 	import type { Session } from 'lucia';
 	import Icon from '@iconify/svelte';
 	import { goto } from '$app/navigation';
+	import { triggerAction } from '$lib/util/triggerAction';
 
 	export let session: Session;
 	$: ({
@@ -11,13 +12,13 @@
 		user: { name, email }
 	} = session);
 
+	$: urlPath = $page.url.pathname;
+
 	const popupFeatured: PopupSettings = {
 		event: 'click',
 		target: 'popupFeatured',
 		placement: 'bottom'
 	};
-
-	$: urlPath = $page.url.pathname;
 </script>
 
 <div class="w-full py-4 px-6 flex justify-between items-center">
@@ -50,9 +51,11 @@
 	<div class="font-bold">{name}</div>
 	<div>{email}</div>
 
-	<form action="?/logout" method="post">
-		<button type="submit" class="btn variant-filled w-full font-semibold mt-5 gap-2">
-			<Icon icon="material-symbols:logout" width="20" height="20" /> Sign Out
-		</button>
-	</form>
+	<button
+		type="submit"
+		class="btn variant-filled w-full font-semibold mt-5 gap-2"
+		on:click={() => triggerAction('/?/logout')}
+	>
+		<Icon icon="material-symbols:logout" width="20" height="20" /> Sign Out
+	</button>
 </div>

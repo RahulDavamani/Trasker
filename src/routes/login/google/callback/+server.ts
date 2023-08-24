@@ -1,6 +1,6 @@
 import { auth, googleAuth } from '$lib/server/lucia.js';
 import { OAuthRequestError } from '@lucia-auth/oauth';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ url, cookies, locals }) => {
 	const storedState = cookies.get('google_oauth_state');
